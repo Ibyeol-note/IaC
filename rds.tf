@@ -18,9 +18,7 @@ resource "aws_db_instance" "main" {
   engine_version       = "15.4"
   instance_class       = var.rds_instance_class
   allocated_storage    = 20
-  max_allocated_storage = 100 # 자동 스케일링 최대값
-  storage_type         = "gp3"
-  storage_encrypted    = true
+  storage_type         = "gp2"
 
   # 데이터베이스 설정
   db_name  = var.db_name
@@ -30,11 +28,11 @@ resource "aws_db_instance" "main" {
   # 네트워크 설정
   db_subnet_group_name   = aws_db_subnet_group.main.name
   vpc_security_group_ids = [aws_security_group.rds.id]
-  publicly_accessible    = false
+  publicly_accessible    = true
   port                   = 5432
 
   # 백업 설정
-  backup_retention_period = 7
+  backup_retention_period = 1
   backup_window           = "03:00-04:00"
   maintenance_window      = "Mon:04:00-Mon:05:00"
 

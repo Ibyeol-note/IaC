@@ -22,15 +22,6 @@ resource "aws_security_group" "ec2" {
     description = "HTTP access"
   }
 
-  # HTTPS
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-    description = "HTTPS access"
-  }
-
   # NestJS 기본 포트 (개발용)
   ingress {
     from_port   = 3000
@@ -60,13 +51,22 @@ resource "aws_security_group" "rds" {
   description = "Security group for RDS instance"
   vpc_id      = aws_vpc.main.id
 
-  # PostgreSQL (EC2에서만 접근 허용)
+  # PostgreSQL (EC2에서 접근 허용)
   ingress {
     from_port       = 5432
     to_port         = 5432
     protocol        = "tcp"
     security_groups = [aws_security_group.ec2.id]
     description     = "PostgreSQL access from EC2"
+  }
+
+  # PostgreSQL (외부 접근 허용 - PoC용)
+  ingress {
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "PostgreSQL access from anywhere"
   }
 
   tags = {

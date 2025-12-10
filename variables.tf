@@ -30,7 +30,7 @@ variable "ec2_instance_type" {
 variable "rds_instance_class" {
   description = "RDS 인스턴스 클래스"
   type        = string
-  default     = "db.t3.micro"
+  default     = "db.t2.micro"
 }
 
 # RDS 데이터베이스 이름
