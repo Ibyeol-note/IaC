@@ -14,11 +14,11 @@ resource "aws_db_instance" "main" {
   identifier = "${var.project_name}-db-${var.environment}"
 
   # 엔진 설정
-  engine               = "postgres"
-  engine_version       = "15.4"
-  instance_class       = var.rds_instance_class
-  allocated_storage    = 20
-  storage_type         = "gp2"
+  engine            = "postgres"
+  engine_version    = "16"
+  instance_class    = var.rds_instance_class
+  allocated_storage = 20
+  storage_type      = "gp2"
 
   # 데이터베이스 설정
   db_name  = var.db_name
@@ -37,13 +37,10 @@ resource "aws_db_instance" "main" {
   maintenance_window      = "Mon:04:00-Mon:05:00"
 
   # 기타 설정
-  multi_az               = false # PoC이므로 단일 AZ
-  skip_final_snapshot    = true  # 개발 환경이므로 최종 스냅샷 스킵
-  deletion_protection    = false # 개발 환경이므로 삭제 보호 해제
-  copy_tags_to_snapshot  = true
-
-  # 파라미터 그룹 (기본값 사용)
-  parameter_group_name = "default.postgres15"
+  multi_az              = false # PoC이므로 단일 AZ
+  skip_final_snapshot   = true  # 개발 환경이므로 최종 스냅샷 스킵
+  deletion_protection   = false # 개발 환경이므로 삭제 보호 해제
+  copy_tags_to_snapshot = true
 
   tags = {
     Name = "${var.project_name}-db-${var.environment}"
