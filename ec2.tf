@@ -45,6 +45,7 @@ resource "aws_instance" "app" {
   vpc_security_group_ids      = [aws_security_group.ec2.id]
   associate_public_ip_address = true
   key_name                    = aws_key_pair.main.key_name
+  iam_instance_profile        = aws_iam_instance_profile.ec2_bedrock.name
 
   root_block_device {
     volume_type           = "gp2"

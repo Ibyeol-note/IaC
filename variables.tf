@@ -60,3 +60,10 @@ variable "allowed_ssh_cidr" {
   type        = string
   default     = "0.0.0.0/0" # 보안상 본인 IP로 제한 권장
 }
+
+# Bedrock 개발 사용자 생성 여부
+variable "create_dev_user" {
+  description = "로컬 개발용 IAM 사용자 생성 여부 (true/false)"
+  type        = bool
+  default     = false # 기본값은 false, 필요 시 true로 설정
+}
