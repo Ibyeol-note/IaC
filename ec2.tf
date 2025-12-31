@@ -59,8 +59,8 @@ resource "aws_instance" "app" {
     # 시스템 업데이트
     dnf update -y
 
-    # Node.js 20 설치
-    dnf install -y nodejs20 npm git
+    # Node.js 20 및 필수 패키지 설치
+    dnf install -y nodejs20 npm git rsync
 
     # PM2 전역 설치
     npm install -g pm2
